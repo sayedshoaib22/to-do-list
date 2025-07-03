@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+        
+        input {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+        }
+        
+        button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        
+        li {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        
+        .done {
+            text-decoration: line-through;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <h1>My To-Do List</h1>
+    
+    <input type="text" id="taskInput" placeholder="Enter a task">
+    <button onclick="addTask()">Add Task</button>
+    
+    <ul id="taskList"></ul>
+
+    <script>
+        let tasks = [];
+
+        function addTask() {
+            let input = document.getElementById('taskInput');
+            let task = input.value;
+            
+            if (task) {
+                tasks.push(task);
+                input.value = '';
+                showTasks();
+            }
+        }
+
+        function showTasks() {
+            let list = document.getElementById('taskList');
+            list.innerHTML = '';
+            
+            for (let i = 0; i < tasks.length; i++) {
+                list.innerHTML += '<li onclick="markDone(' + i + ')">' + tasks[i] + '</li>';
+            }
+        }
+
+        function markDone(index) {
+            let item = document.getElementsByTagName('li')[index];
+            item.classList.toggle('done');
+        }
+    </script>
+</body>
+</html>
